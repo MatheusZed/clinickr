@@ -4,7 +4,7 @@ development:
   database: clinickr_development
   pool: 5
   host: localhost
-  username: clinickr
+  username: postgres
   password: admin123
 
 test:
@@ -13,5 +13,5 @@ test:
   database: clinickr_test
   pool: 5
   host: localhost
-  username: clinickr
+  username: postgres
   password: admin123
