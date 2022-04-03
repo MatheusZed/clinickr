@@ -1,20 +1,17 @@
-default: &default
+development:
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  database: clinickr_development
   pool: 5
+  host: localhost
   username: clinickr
   password: admin123
 
-development:
-  <<: *default
-  database: "clinickr_development"
-
 test:
-  <<: *default
-  database: "clinickr_test"
-
-production:
-  <<: *default
-  database: "clinickr_production"
+  adapter: postgresql
+  encoding: unicode
+  database: clinickr_test
+  pool: 5
+  host: localhost
+  username: clinickr
+  password: admin123
