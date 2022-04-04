@@ -5,6 +5,7 @@ require './models/test'
 require './models/doctor'
 require './models/patient'
 require './models/exam'
+require_relative './import'
 require 'pry'
 
 namespace '/api/v1' do
@@ -41,5 +42,9 @@ namespace '/api/v1' do
 
   get '/doctors' do
     Doctor.all.to_json
+  end
+
+  post '/import' do
+    Import.new(params['file']['tempfile']).create
   end
 end
