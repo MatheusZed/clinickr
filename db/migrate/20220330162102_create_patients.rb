@@ -7,6 +7,7 @@ class CreatePatients < ActiveRecord::Migration[7.0]
       t.datetime :birthday
       t.string :city
       t.string :state
+      t.string :address
 
       t.timestamps
     end

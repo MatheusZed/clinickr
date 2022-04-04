@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 202203301622045) do
     t.datetime "birthday"
     t.string "city"
     t.string "state"
+    t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

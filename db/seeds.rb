@@ -5,7 +5,7 @@ exams_hash = { result_token: SecureRandom.alphanumeric(6), result_date: Time.new
 10.times do
   exams << exams_hash
 end
-patient = [{ name: 'Paciente teste', cpf: '324.312.482-43', email: 'test@example.com', birthday: '1988-03-01', city: 'Sao Paulo', state: 'SP' }]
+patient = [{ name: 'Paciente teste', cpf: '324.312.482-43', email: 'test@example.com', birthday: '1988-03-01', city: 'Sao Paulo', state: 'SP', address: 'Batatinha123' }]
 doctor = [{ name: 'Medico teste', email: 'email@doctor.com', crm: SecureRandom.hex(10), crm_state: 'SP' }]
 tests = []
 tests_hash = { test_type: 'Covid', test_limits: 35, result: 10, exam_id: 1 }
