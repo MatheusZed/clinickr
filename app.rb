@@ -17,7 +17,7 @@ namespace '/api/v1' do
     result = Exam.where(result_token: token)
     json = JSON.parse(
       result.to_json(
-        methods: %i[patient],
+        methods: %i[patient_response],
         only: %i[result_token result_date],
         include:
         {
