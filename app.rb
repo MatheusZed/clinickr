@@ -54,11 +54,12 @@ class App < Sinatra::Application
     file = params['file']['tempfile']
     filename = params['file']['filename']
 
-    File.open("#{filename}-#{Time.now.to_i}", 'a+') do |f|
+    name = "#{Time.now.to_i}-#{filename}"
+    File.open(name, 'a+') do |f|
       f.write(file.read)
     end
 
-    ImportWorker.perform_async(filename)
+    ImportWorker.perform_async(name)
     { import: { status: 'processing' } }.to_json
   end
 end
