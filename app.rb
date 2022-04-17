@@ -1,14 +1,20 @@
 require 'sinatra'
-require 'sinatra/namespace'
+require 'sinatra/base'
 require 'sinatra/activerecord'
 require './models/test'
 require './models/doctor'
 require './models/patient'
 require './models/exam'
 require_relative './import'
+require './lib/import_worker'
 require 'pry'
 
-namespace '/api/v1' do
+Sidekiq.configure_client do |config|
+  config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
+end
+
+$redis = Redis.new( url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" )
+class App < Sinatra::Application
   before do
     content_type 'application/json'
   end
@@ -45,6 +51,14 @@ namespace '/api/v1' do
   end
 
   post '/import' do
-    Import.new(params['file']['tempfile']).create
+    file = params['file']['tempfile']
+    filename = params['file']['filename']
+
+    File.open("#{filename}-#{Time.now.to_i}", 'a+') do |f|
+      f.write(file.read)
+    end
+
+    ImportWorker.perform_async(filename)
+    { import: { status: 'processing' } }.to_json
   end
 end
